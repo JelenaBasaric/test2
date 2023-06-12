@@ -76,14 +76,13 @@ public class ReaderThread extends Thread {
             System.out.println("greska u readerThread");
             Thread.currentThread().interrupt();
             ex.printStackTrace();
-            Logger.getLogger(ReaderThread.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+            } finally {
             try {
                 toServer.close();
                 fromServer.close();
                 client.close();
             } catch (IOException ex) {
-                Logger.getLogger(ReaderThread.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }

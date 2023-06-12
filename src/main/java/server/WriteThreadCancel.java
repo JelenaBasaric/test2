@@ -34,8 +34,7 @@ public class WriteThreadCancel implements Runnable {
 
     public void run() {
        
-        Cancel c = new Cancel(3);
-        
+
         try {
              id+=2;
             System.out.println("id"+id);
@@ -48,7 +47,7 @@ public class WriteThreadCancel implements Runnable {
             toClient = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             bb.flip();
-            if (bb == null || !bb.hasRemaining()) {
+            if ( !bb.hasRemaining()) {
                 System.out.println("prazan je");
                 return;
             }
