@@ -5,10 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.WriteThreadCancel;
@@ -20,7 +18,7 @@ import server.WriteThreadDummy;
  */
 public class ReaderThread extends Thread {
 
-    private Socket client;
+    private final Socket client;
     BufferedWriter toServer;
     BufferedReader fromServer;
 
@@ -39,14 +37,14 @@ public class ReaderThread extends Thread {
 
             while (!isInterrupted()) {
                 // while(true){
-                String receivedMessage = fromServer.readLine().toString();
+                String receivedMessage = fromServer.readLine();
                 String reciveString = "";
                 if (receivedMessage.length() == 5) {
                     // System.out.println("duzina "+receivedMessage);
                     int len = Integer.parseInt(receivedMessage);
                     System.out.println("duzina " + len);
                     if (len == 16) {
-                        reciveString = fromServer.readLine().toString();
+                        reciveString = fromServer.readLine();
                         System.out.println("packet:" + reciveString);
                         //byte[] arr = reciveString.getBytes(StandardCharsets.UTF_8);
                           byte[] arr = reciveString.getBytes();
