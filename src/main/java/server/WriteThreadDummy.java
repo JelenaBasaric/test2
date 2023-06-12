@@ -35,14 +35,9 @@ public class WriteThreadDummy implements Runnable {
         try {
              toClient = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-           // int id=Thread.activeCount();
-           // d.setId(id++);
-            System.out.println("id dummy"+id);
-            //System.out.println("Insert delay:");
-            //int delay=fromClient.read();
+             System.out.println("id dummy"+id);
             d.setDelay(30);
             d.setId(id);
-          //  System.out.println("delay"+30);
             String packet = "";
             ByteBuffer bb = ByteBuffer.allocate(d.getLen());
             bb.putInt(d.getIdPaket());

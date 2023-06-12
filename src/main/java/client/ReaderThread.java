@@ -39,7 +39,6 @@ public class ReaderThread extends Thread {
                 String receivedMessage = fromServer.readLine();
                 String reciveString = "";
                 if (receivedMessage.length() == 5) {
-                    // System.out.println("duzina "+receivedMessage);
                     int len = Integer.parseInt(receivedMessage);
                     System.out.println("duzina " + len);
                     if (len == 16) {
