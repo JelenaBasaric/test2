@@ -16,8 +16,7 @@ import java.nio.ByteBuffer;
  */
 public class WriteThreadCancel implements Runnable {
 
-    private Socket socket;
-    private boolean transfer;
+    private final Socket socket;
     BufferedWriter toClient;
     BufferedReader fromClient;
      Cancel c ;

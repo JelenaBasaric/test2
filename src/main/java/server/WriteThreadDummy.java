@@ -14,9 +14,8 @@ import java.nio.ByteBuffer;
  */
 public class WriteThreadDummy implements Runnable {
 
-    private Socket socket;
-    private boolean transfer;
-    BufferedWriter toClient;
+    private final Socket socket;
+     BufferedWriter toClient;
     BufferedReader fromClient;
     int id=2;
 
