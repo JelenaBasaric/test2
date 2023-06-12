@@ -21,6 +21,7 @@ public class WriteThreadCancel implements Runnable {
     BufferedWriter toClient;
     BufferedReader fromClient;
      Cancel c ;
+     int id=1;
 
     public WriteThreadCancel(Socket socket, BufferedWriter toClient, BufferedReader fromClient) {
         this.socket = socket;
@@ -35,7 +36,11 @@ public class WriteThreadCancel implements Runnable {
     public void run() {
        
         Cancel c = new Cancel(3);
+        
         try {
+             id+=2;
+            System.out.println("id"+id);
+            c.setId(id);
             String packet = "";
             ByteBuffer bb = ByteBuffer.allocate(c.getLen());
             bb.putInt(c.getIdpaketa());

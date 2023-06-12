@@ -48,11 +48,10 @@ public class ReaderThread extends Thread {
                     if (len == 16) {
                         reciveString = fromServer.readLine().toString();
                         System.out.println("packet:" + reciveString);
-                        byte[] arr = reciveString.getBytes(StandardCharsets.UTF_8);
+                        //byte[] arr = reciveString.getBytes(StandardCharsets.UTF_8);
+                          byte[] arr = reciveString.getBytes();
                         ByteBuffer bb = ByteBuffer.wrap(arr);
-                        int idPacket=bb.getInt();
-                        int l=bb.getInt();
-                        int delay = bb.getInt();
+                        int delay = bb.getInt(3);
                         System.out.println("Delay" + delay);
                         WriteThreadCancel writeThreadCancel = new WriteThreadCancel(client, toServer, fromServer);
                         WriteThreadDummy writeThread = new WriteThreadDummy(client, toServer, fromServer);
@@ -83,7 +82,9 @@ public class ReaderThread extends Thread {
             Logger.getLogger(ReaderThread.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
+                toServer.close();
                 fromServer.close();
+                client.close();
             } catch (IOException ex) {
                 Logger.getLogger(ReaderThread.class.getName()).log(Level.SEVERE, null, ex);
             }

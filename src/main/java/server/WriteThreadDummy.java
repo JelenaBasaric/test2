@@ -18,6 +18,7 @@ public class WriteThreadDummy implements Runnable {
     private boolean transfer;
     BufferedWriter toClient;
     BufferedReader fromClient;
+    int id=2;
 
     public WriteThreadDummy(Socket socket, BufferedWriter toClient, BufferedReader fromClient) {
         this.socket = socket;
@@ -31,15 +32,25 @@ public class WriteThreadDummy implements Runnable {
 
     public void run() {
         Dummy d = new Dummy();
+        id+=2;
         try {
+             toClient = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+           // int id=Thread.activeCount();
+           // d.setId(id++);
+            System.out.println("id dummy"+id);
+            //System.out.println("Insert delay:");
+            //int delay=fromClient.read();
+            d.setDelay(30);
+            d.setId(id);
+          //  System.out.println("delay"+30);
             String packet = "";
             ByteBuffer bb = ByteBuffer.allocate(d.getLen());
             bb.putInt(d.getIdPaket());
             bb.putInt(d.getLen());
             bb.putInt(d.getDelay());
             bb.putInt(d.getId());
-            toClient = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+           
             bb.flip();
             if (!bb.hasRemaining()) {
                 System.out.println("prazan je");
